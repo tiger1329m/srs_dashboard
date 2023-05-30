@@ -99,7 +99,7 @@ app.layout = html.Div(
         html.H1("Дашборд. Как часто курят жители США"),
         html.Div(id="output-clientside"),
 
-        html.Br(), 
+        html.Br(),
 
         html.Label([
             "Выберите частоту: ",
@@ -138,6 +138,24 @@ app.layout = html.Div(
                 id='daily-smoker',
             )
         ]),
+
+        html.Br(),
+
+        html.Div([
+            dcc.Graph(
+                id='donut-chart',
+                figure=go.Figure(go.Pie(
+                    labels=['Каждый день', 'Иногда', 'В прошлом', 'Никогда'],
+                    values=[df['Smoke everyday'].sum(), df['Smoke some days'].sum(), df['Former smoker'].sum(),
+                            df['Never smoked'].sum()],
+                    hole=.5, hoverinfo="label+value",
+                    textinfo='percent',
+                    textfont=dict(color='#000000', size=14)
+                ),
+                    layout={'title': 'Отношение типов курильщиков'}
+                ))
+        ]),
+
     ]
 )
 
@@ -178,4 +196,5 @@ def update_map(per):
 
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    print()
+    app.run_server(debug=0)
