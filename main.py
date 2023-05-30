@@ -122,7 +122,7 @@ app.layout = html.Div(
 
         # Добавляем элементы управления
         html.Label([
-            "Выберите состояние: ",
+            "Выберите штат: ",
             dcc.Dropdown(
                 id='state-dropdown',
                 options=[{'value': s, 'label': s} for s in df['State'].unique()],
